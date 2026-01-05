@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Te quiero mucho</title>
+<style>
+body{
+  margin:0;
+  height:100vh;
+  background: linear-gradient(135deg,#ff5f9e,#ff8dc7);
+  overflow:hidden;
+  font-family:Arial, sans-serif;
+  text-align:center;
+}
+
+h1{
+  color:white;
+  margin-top:40vh;
+  font-size:3rem;
+  text-shadow:0 0 15px #000;
+  pointer-events:none;
+}
+
+/* Corazones */
+.love{
+  position:fixed;
+  top:-30px;
+  font-size:24px;
+  animation:fall linear forwards;
+}
+
+@keyframes fall{
+  to{
+    transform:translateY(110vh);
+    opacity:0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<h1>💖 Te quiero mucho Mi Cam 💖</h1>
+
+<audio id="music" loop>
+  <source src="musica.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const music = document.getElementById("music");
+let volume = 0.2;
+music.volume = volume;
+
+// Cada vez que toquen la pantalla
+document.body.addEventListener("click", () => {
+
+  // Reproducir música
+  music.play();
+
+  // Subir volumen poco a poco
+  if(volume < 1){
+    volume += 0.1;
+    music.volume = volume;
+  }
+
+  // Crear lluvia de corazones
+  for(let i=0;i<12;i++){
+    crearAmor();
+  }
+});
+
+function crearAmor(){
+  const e = document.createElement("div");
+  e.className="love";
+  e.innerHTML="❤️ Te quiero ❤️";
+  e.style.left=Math.random()*100+"vw";
+  e.style.fontSize=(20+Math.random()*20)+"px";
+  e.style.animationDuration=(3+Math.random()*3)+"s";
+  document.body.appendChild(e);
+  setTimeout(()=>e.remove(),8000);
+}
+</script>
+
+</body>
+</html>
